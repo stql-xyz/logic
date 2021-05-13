@@ -1,0 +1,21 @@
+/* client/pages/detail/detail.wxss */
+.page {
+  margin: 0 var(--space-1);
+}
+.question {
+  background: pink;
+  padding: var(--space-4);
+}
+.question-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.answer {
+  border: 1px solid pink;
+  margin: 10px 0;
+}
+.answer .result {
+  border-bottom: 1px solid green;
+}

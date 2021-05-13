@@ -1,0 +1,8 @@
+<!--client/pages/home/home.wxml-->
+<view class="page">
+  <view class="category-list" bindtap="goDetail">
+    <block wx:for="{{category_list}}" wx:key="*this">
+      <view class="category">{{item}}</view>
+    </block>
+  </view>
+</view>

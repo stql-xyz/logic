@@ -1,0 +1,29 @@
+<!--client/pages/detail/detail.wxml-->
+<view class="page">
+  <view class="question">
+    <text decode="{{true}}">{{logic_content}}</text>
+  </view>
+  <view class="question-action">
+    <view>查看参考解决方案</view>
+    <view>点赞: 0</view>
+  </view>
+  <!-- <view>广告</view> -->
+  <view class="answer">
+    <view class="result">
+      不直接的回答：“喂，你知道如果我问你姐姐这条路走向哪里，她会怎样回答吗？”
+    </view>
+    <view class="analysis">
+      不管问姐姐还是妹妹答案总是错的那条路
+    </view>
+  </view>
+  <view class="answer">
+    <view class="result">
+      复杂的回答： “喂，我迷路了。如果我问你问路。。。，你会怎样回答？”
+    </view>
+    <view class="analysis">
+      说真话的人答案就很清楚，但是说谎的人就要说谎。然而，她被迫说谎两次，那么就成为真话了。
+    </view>
+  </view>
+  <view class="comment">评论</view>
+  <button type="primary" class="">下一题</button>
+</view>
