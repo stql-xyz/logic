@@ -1,0 +1,72 @@
+/** https://www.colorgg.com/b8f1cc */
+/* --negative: rgba(250,254,251,1); * 色度/色彩 倒数第一个颜色 */
+.green-page {
+  --question-bg: rgba(184,241,204,0.5);  /** 问题背景 */
+  --page-bg: rgba(233,251,239,1); /** 色度/色彩 倒数第二个颜色 */
+  --negative: rgba(210,215,212,0.6); /** 色调 第一个颜色 */
+  --active: rgba(184,235,241,0.8); /** 配色方案 中差色 最后一个（偏蓝色） */
+  --dianzan-shadow: rgba(192,241,184,1); /** 类似色 第一个 */
+  --like: rgba(241,184,221,1); /** 配色方案 互补色 */
+  --answer-bg: rgba(184,241,232,0.5); /** 矩形（四元）配色 第二个 */
+  --next-hover: rgba(184,241,190,1); /** 相似颜色 第一个颜色 */
+  --bottom-bg: rgba(184,241,204,1); /** 问题背景 */
+  --bottom-color: rgba(0, 0, 0, 0.3); /** 底部颜色 */
+  --bottom-active: rgba(2,11,5,1); /** 色度/色彩 最后一个 */
+  --logic-title: rgba(2,11,5,0.5); /** 色度/色彩 最后一个 */
+  --logic-title-active: rgba(16,174,255,1); /** var.wxss中蓝色 */
+  --bottom-border: rgba(12,60,29,0.2); /** 色度/色彩 倒数第四个 */
+  --theme-color: unset;
+}
+.yellow-page {
+  --question-bg: rgba(241,241,184,0.5);  /** 问题背景 */
+  --page-bg: rgba(247,247,217,1); /** 色度/色彩 倒数第二个颜色 */
+  --negative: rgba(215,215,210,0.6); /** 色调 第一个颜色 */
+  --active: rgba(198,241,184,0.8); /** 配色方案 中差色 最后一个（偏蓝色） */
+  --dianzan-shadow: rgba(241,213,184,1); /** 类似色 第一个 */
+  --like: rgba(184,184,241,1); /** 配色方案 互补色 */
+  --answer-bg: rgba(227,241,184,0.5); /** 相似颜色 最后一个 */
+  --next-hover: rgba(241,227,184,1); /** 相似颜色 第一个颜色 */
+  --bottom-bg: rgba(241,241,184,1); /** 问题背景 */
+  --bottom-color: rgba(0, 0, 0, 0.3); /** 底部颜色 */
+  --bottom-active: rgba(11,11,2,1); /** 色度/色彩 最后一个 */
+  --logic-title: rgba(11,11,2,0.5); /** 色度/色彩 最后一个 */
+  --logic-title-active: rgba(16,174,255,1); /** var.wxss中蓝色 */
+  --bottom-border: rgba(60,60,12,0.2); /** 色度/色彩 倒数第四个 */
+  --theme-color: unset;
+}
+.light-page {
+  /** 参考色 f6f6f6 */
+  --question-bg: rgba(255,255,255,1);  /** 问题背景 */
+  --page-bg: rgba(246,246,246,1); /**  常用背景色 */
+  --negative: rgba(221,221,221,0.1); /** 单色第一个 */
+  --active: rgba(16,174,255,0.1); /** 配色方案 中差色 最后一个（偏蓝色） */
+  --dianzan-shadow: rgba(238,238,238,1); /** 相似颜色 第一个 */
+  --like: rgba(252,138,138,1); /** --font-red 至白中间一个  */
+  --answer-bg: rgba(255,255,255,1); /** 相似颜色 最后一个 */
+  --next-hover: rgba(187,187,187,0.5); /** 至白中间一个 */
+  --bottom-bg: rgba(255,255,255,1); /** 问题背景 */
+  --bottom-color: rgba(0, 0, 0, 0.3); /** 底部颜色 */
+  --bottom-active: rgba(1,1,1,1); /** 色度/色彩 最后一个 */
+  --logic-title: rgba(1,1,1,0.5); /** 色度/色彩 最后一个 */
+  --logic-title-active: rgba(16,174,255,1); /** var.wxss中蓝色 */
+  --bottom-border: rgba(30,30,30,0.2); /** 色度/色彩 倒数第四个 */
+  --theme-color: unset;
+}
+.dark-page {
+  /** 参考色 f6f6f6 */
+  --question-bg: rgba(31, 32, 34,1);  /** 问题背景 */
+  --page-bg: rgba(0, 0, 0,1); /**  常用背景色 */
+  --negative: rgba(221,221,221,0.1); /** 单色第一个 */
+  --active: rgba(16,174,255,0.1); /** 配色方案 中差色 最后一个（偏蓝色） */
+  --dianzan-shadow: rgba(31, 32, 34,1); /** 问题背景 */
+  --like: rgba(252,138,138,1); /** --font-red 至白中间一个  */
+  --answer-bg: rgba(31, 32, 34,1); /** 问题背景 */
+  --next-hover: rgba(31, 32, 34,1); /** 问题背景 */
+  --bottom-bg: rgba(31, 32, 34,1); /** 问题背景 */
+  --bottom-color: rgba(255,255,255,0.6); /** 底部颜色 */
+  --bottom-active: rgba(16,174,255,1); /** var.wxss中蓝色 */
+  --logic-title: rgba(250,250,250,0.5); /** 色度/色彩 最后一个 */
+  --logic-title-active: rgba(16,174,255,1); /** var.wxss中蓝色 */
+  --bottom-border: rgba(30,30,30,0.2); /** 色度/色彩 倒数第四个 */
+  --theme-color: white !important;
+}

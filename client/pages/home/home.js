@@ -1,23 +1,20 @@
 // client/pages/home/home.js
+import COMFUN from '../../utils/comfun';
+const APP = getApp();
+const AppGlobalData = APP.globalData;
 Page({
- 
+
   data: {
-    category_list: [
-      '逻辑推理题(0/100)',
-      '悖论(0/80)',
-      '量水问题(0/80)',
-      '纵横问题(0/80)'
-    ]
+    theme_index: APP.getThemeIndex(),
+    color_strs: AppGlobalData.color_strs,
+    category_list: AppGlobalData.category_list,
   },
 
-  goDetail() {
-    const type = 'common';
-    const url = `/pages/detail/detail?type=${type}`;
-    wx.navigateTo({ url });
-  },
+  vibrate: COMFUN.vibrate,
 
   onLoad: function (options) {
-
+    APP.setTabBar();
+    APP.setNavBar();
   },
 
   onReady: function () {
@@ -25,7 +22,9 @@ Page({
   },
 
   onShow: function () {
-
+    this.setData({ theme_index: APP.getThemeIndex() });
+    APP.setTabBar();
+    APP.setNavBar();
   },
 
   onHide: function () {
@@ -46,5 +45,9 @@ Page({
 
   onShareAppMessage: function () {
 
+  },
+
+  onTabItemTap: function () {
+    COMFUN.vibrate();
   }
 })

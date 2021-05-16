@@ -1,6 +1,8 @@
 page {
-
+  overflow: hidden;
+  box-sizing: border-box;
   font-size: 32rpx;
+  background: #F6F6F6;
 
   --avatar-width: 140rpx;
 

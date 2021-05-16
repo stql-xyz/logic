@@ -21,6 +21,12 @@
         {
           "name": "详情",
           "pathName": "pages/detail/detail",
+          "query": "type=logic_short",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
           "query": "type=common",
           "scene": null
         }

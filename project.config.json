@@ -40,6 +40,7 @@
   "appid": "wx9a5bdb1f4b43f493",
   "projectname": "logic",
   "libVersion": "2.14.1",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []
