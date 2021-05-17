@@ -5,7 +5,7 @@ const AppGlobalData = APP.globalData;
 Page({
 
   data: {
-    theme_index: APP.getThemeIndex(),
+    theme_index: 'unknow',
     color_strs: AppGlobalData.color_strs,
     category_list: AppGlobalData.category_list,
   },
@@ -13,6 +13,7 @@ Page({
   vibrate: COMFUN.vibrate,
 
   onLoad: function (options) {
+    this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();
   },

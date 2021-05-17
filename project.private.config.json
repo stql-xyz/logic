@@ -29,6 +29,12 @@
           "pathName": "pages/my/my",
           "query": "type=common",
           "scene": null
+        },
+        {
+          "name": "pages/star/star",
+          "pathName": "pages/star/star",
+          "query": "",
+          "scene": null
         }
       ]
     }
