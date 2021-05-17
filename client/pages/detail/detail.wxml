@@ -17,13 +17,11 @@
           <text>参考方案</text>
         </view>
       </view>
-      <view style="padding: 10px" bindtap="handleIsLike">
-        <view class="dian-zan {{logic.is_like ? 'dian-zan-like':''}}">
-          <text wx:if="{{logic.is_like}}" class="iconfont icon-liked"></text>
-          <text wx:else class="iconfont icon-like"></text>
-          <text>{{logic.like_num || 0}}</text>
+      <button class="share-btn" open-type="share" bindtap="vibrate">
+        <view class="share">
+          <text class="iconfont icon-fenxiang"></text>
         </view>
-      </view>
+      </button>
     </view>
     <view class="question-answer-list" wx:if="{{show_answer}}">
       <view class="answer" wx:for="{{logic.answer}}" wx:key="*this">

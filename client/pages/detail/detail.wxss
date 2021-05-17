@@ -35,21 +35,21 @@
   margin-right: 5px;
   font-size: 32rpx;
 }
-.dian-zan {
+.share-btn {
+  width: auto !important;
+  padding: 10px;
+  margin-right: unset !important;
+  background: transparent;
+}
+.share {
   padding: 8rpx 24rpx;
   border-radius: 16rpx;
-  background: var(--negative);
+  background: var(--active);
   box-shadow: 0 0 20rpx var(--dianzan-shadow);
 }
-.dian-zan-like {
-  background: var(--active);
-}
-.dian-zan .icon-liked {
-  color: var(--like);
-}
-.dian-zan .iconfont {
-  margin-right: 8px;
+.share .iconfont {
   font-size: 40rpx;
+  color: var(--like);
 }
 /** 答案 */
 .answer {

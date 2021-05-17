@@ -23,10 +23,6 @@
   color: var(--theme-color);
 }
 
-.page .icon-liked {
-  font-size: 44rpx;
-  color: var(--like);
-}
 .page .icon-star {
   font-size: 44rpx;
   color: var(--like);
