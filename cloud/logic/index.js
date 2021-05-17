@@ -11,19 +11,21 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event) => {
   const app = new TcbRouter({ event });
-  const { OPENID } = cloud.getWXContext()
-  /** 获取逻辑题目喜欢数量 */
-  app.router('get_logic_like', async (ctx) => {
-    const { logic_id  } = event;
-    try {
-      const { total: is_like } = await db.collection('user_like').where({ logic_id, _openid: OPENID }).count();
-      const { total: like_num } = await db.collection('user_like').where({ logic_id }).count();
-      ctx.body = { ok: true, like_num, is_like: is_like > 0 };
-    } catch (error) {
-      log.error({ name: 'get_first_logic', error });
-			ctx.body = { ok: false };
-    }
-  });
+  // const { OPENID } = cloud.getWXContext()
+  // app.router('get_qrcode', async (ctx) => {
+  //   const { page, type, logic_id } = event;
+  //   try {
+  //     const page_url = `${page}?type=${type}&logic_id=${logic_id}`;
+  //     const scene = `oid=${OPENID}`;
+  //     console.log(page_url, scene);
+  //     const { buffer } = await cloud.openapi.wxacode.getUnlimited({ page: page_url, scene, autoColor: true, isHyaline: true });
+  //     const { fileID } = await cloud.uploadFile({ cloudPath: `qrcode/${logic_id}.png`, fileContent: buffer });
+  //     ctx.body = { ok: true, data: fileID };
+  //   } catch (error) {
+  //     log.error({ name: 'get_logic_title', error });
+	// 		ctx.body = { ok: false };
+  //   }
+  // });
   /** 访问逻辑题目标题 */
   app.router('get_logic_title', async (ctx) => {
     const { type } = event;

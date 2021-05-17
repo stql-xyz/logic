@@ -1,0 +1,11 @@
+<!--client/pages/share/share.wxml-->
+<wxml-to-canvas class="widget"></wxml-to-canvas>
+<button bindtap="extraImage">导出图片</button>
+
+
+<!-- 分享图片demo -->
+
+
+<!-- ---- -->
+
+<view>{{tempFilePath}}</view>

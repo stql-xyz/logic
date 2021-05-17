@@ -29,6 +29,12 @@
           "pathName": "pages/my/my",
           "query": "type=common",
           "scene": null
+        },
+        {
+          "name": "pages/share/share",
+          "pathName": "pages/share/share",
+          "query": "type=logic_short&logic_id=28ee4e3e609fe1071902d10d6fadb173",
+          "scene": null
         }
       ]
     }
