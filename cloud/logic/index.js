@@ -30,6 +30,7 @@ exports.main = async (event) => {
     try {
       const { list = [] } = await db.collection(type)
         .aggregate()
+        .limit(10000)
         .project({ title: true, index: true })
         .end();
       ctx.body = { ok: true, data: list };
