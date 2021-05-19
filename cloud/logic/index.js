@@ -28,8 +28,9 @@ exports.main = async (event) => {
   app.router('get_logic_title', async (ctx) => {
     const { type } = event;
     try {
-      const { list = [] } = await db.collection(type)
+      const { list = [] } = await db.collection('logic')
         .aggregate()
+        .match({ type })
         .limit(10000)
         .project({ title: true, index: true })
         .end();

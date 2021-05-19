@@ -2,7 +2,7 @@
 <view class="page">
   <view class="category-list {{color_strs[theme_index]}}-page">
     <block wx:for="{{category_list}}" wx:key="key">
-      <navigator url="/pages/detail/detail?type={{item.key}}" bindtap="vibrate">
+      <navigator url="/pages/detail/detail?type={{item.type}}" bindtap="vibrate">
         <view class="category">{{item.title}}</view>
       </navigator>
     </block>

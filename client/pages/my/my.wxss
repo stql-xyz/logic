@@ -23,7 +23,7 @@
   color: var(--theme-color);
 }
 
-.page .icon-star {
+.page .iconfont {
   font-size: 44rpx;
   color: var(--like);
 }

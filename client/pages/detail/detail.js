@@ -61,7 +61,7 @@ Page({
   logic_cache: {},
   async getLogicById(logic_id) {
     if (this.data.btn_loading || !logic_id) return;
-    const { logic: old_logic, type } = this.data;
+    const { logic: old_logic } = this.data;
     /** 先保存缓存、来不及保存star, 也会缓存； 有缓存的直接返回 */
     this.logic_cache[old_logic._id] = old_logic;
     if (this.logic_cache[logic_id]) {
@@ -72,7 +72,7 @@ Page({
     const db = wx.cloud.database();
     this.setData({ btn_loading: true });
     try {
-      const { data: logic } = await db.collection(type).doc(logic_id).get();
+      const { data: logic } = await db.collection('logic').doc(logic_id).get();
       this.setData({ logic }, this.setLogicStar);
     } catch (error) {
       COMFUN.showErr({ error, type: 'get_logic_byid' });
@@ -105,7 +105,7 @@ Page({
     if (!diff) return;
     this.vibrate();
     const { logic, logic_title } = this.data;
-    const index = logic_title.find(item => item._id === logic._id);
+    const index = logic_title.findIndex(item => item._id === logic._id);
     const result = logic_title[index + diff];
     if (!result) {
       const content = (diff > 0) ? '已看完全部题目' : '前面没有题目了';
@@ -113,6 +113,9 @@ Page({
     } else {
       this.getLogicById(result._id);
     }
+  },
+  nextLogic() {
+    this.jumpLogic(1);
   },
   /** ------------底部处理------------- */
   /** 页面滚动取消底部导航栏选择 */
@@ -165,10 +168,10 @@ Page({
         const db = wx.cloud.database();
         const new_logic_id = logic_id || wx.getStorageSync(`${type}_current`);
         if (new_logic_id) {
-          const { data: logic } = await db.collection(type).doc(new_logic_id).get();
+          const { data: logic } = await db.collection('logic').doc(new_logic_id).get();
           this.setData({ logic });
         } else {
-          const { data: [logic] } = await db.collection(type).where({ index: 1 }).get();
+          const { data: [logic] } = await db.collection('logic').where({ index: 1, type }).get();
           this.setData({ logic });
         }
         this.setLogicStar();
@@ -181,7 +184,7 @@ Page({
       COMFUN.showErr({ error, type: 'init_detail' });
     }
     /** 设置标题顶部与是否阅读 */
-    const { title: logic_topic } = AppGlobalData.category_list.find(item => item.key === type);
+    const { title: logic_topic } = AppGlobalData.category_list.find(item => item.type === type);
     const logic_read = APP.setLogicRead(type);
     this.setData({ logic_topic, logic_read });
     APP.setNavBar();

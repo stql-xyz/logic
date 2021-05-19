@@ -28,10 +28,10 @@ App({
     const color_strs = ['light', 'yellow', 'green', 'dark'];
 
     /** ---------- 逻辑题目分类  ----------   */
-    const short = { title: '短篇逻辑推理', key: 'logic_short' };
-    const long = { title: '长篇逻辑推理', key: 'logic_long' };
-    const math = { title: '数学推理', key: 'logic_match' };
-    const paradox = { title: '逻辑悖论', key: 'logic_paradox' };
+    const short = { title: '短篇逻辑推理', type: 'short' };
+    const long = { title: '长篇逻辑推理', type: 'long' };
+    const math = { title: '数学推理', type: 'match' };
+    const paradox = { title: '逻辑悖论', type: 'paradox' };
     this.globalData = {
       page_colors,
       theme_colors,

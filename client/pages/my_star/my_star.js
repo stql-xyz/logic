@@ -13,11 +13,7 @@ Page({
   async getStarData() {
     // 遍历获取所有题目
     try {
-      const { category_list } = AppGlobalData;
-      const db = wx.cloud.database();
-      for (let i = 0; i< category_list.length; i++) {
-        // 请求每个type的收藏数据
-      }
+      
     } catch (error) {
       COMFUN.showErr({ type: 'get_star_data', error });
     }
@@ -25,6 +21,6 @@ Page({
   onLoad: function (options) {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setNavBar();
-    this.getData();
+    this.getStarData();
   },
 })
