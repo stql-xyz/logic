@@ -11,4 +11,7 @@
   <row-cell title="我的收藏" link="/pages/star/star">
       <text slot="icon" class="iconfont icon-star"></text>
   </row-cell>
+  <row-cell title="历史记录" link="/pages/history/history">
+      <text slot="icon" class="iconfont icon-star"></text>
+  </row-cell>
 </view>

@@ -42,7 +42,6 @@ App({
     }
     const theme_index = wx.getStorageSync('theme_index');
     this.globalData.theme_index = theme_index;
-    // this.initUser();
   },
 
   getThemeIndex() {
@@ -64,27 +63,12 @@ App({
     wx.setNavigationBarColor({ backgroundColor: page_colors[theme_index], frontColor: frontColors[theme_index] });
   },
 
-  // async initUser() {
-  //   const db = wx.cloud.database();
-  //   try {
-  //     const { data = [] } = await db.collection('user').get();
-	// 		if (!data[0]) {
-	// 			const { _id } = await db.collection('user').add({ data: { create_time: db.serverDate() } });
-  //       this.globalData.user = { _id };
-  //     } else {
-  //       this.globalData.user = data[0];
-  //     }
-  //   } catch (error) {
-  //     COMFUN.showErr({ error, type: 'init_user' });
-  //   }
-  // },
-
   setLogicRead(type, id) {
     if (!type) return {};
     const key = `${type}_read`;
     const logic_read = wx.getStorageSync(key) || {};
     if (!id) return logic_read;
-    logic_read[id] = true;
+    logic_read[id] = new Date().valueOf();
     wx.setStorage({ data: logic_read, key });
     return logic_read;
   },
