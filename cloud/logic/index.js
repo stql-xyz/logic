@@ -11,16 +11,26 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event) => {
   const app = new TcbRouter({ event });
-  const { OPENID } = cloud.getWXContext()
-  /** 获取逻辑题目喜欢数量 */
-  app.router('get_logic_like', async (ctx) => {
-    const { logic_id  } = event;
+  app.router('get_user_logic', async (ctx) => {
+    const { OPENID = '' } = cloud.getWXContext()
+    const { sort_type, sort_value, limit = 1000, total = 0, type } = event;
     try {
-      const { total: is_like } = await db.collection('user_like').where({ logic_id, _openid: OPENID }).count();
-      const { total: like_num } = await db.collection('user_like').where({ logic_id }).count();
-      ctx.body = { ok: true, like_num, is_like: is_like > 0 };
+      const { list = [] } = await db.collection('logic_read')
+        .aggregate()
+        .match({ _openid: OPENID })
+        .lookup({ from: 'logic', localField: 'logic_id', foreignField: '_id', as: 'logic' })
+				.addFields({ logic: $.arrayElemAt(['$logic', 0]) })
+				.addFields({ 'logic.create_time': '$create_time' })
+				.replaceRoot({ newRoot: '$logic' })
+        .match({ type })
+        .sort({ [sort_type]: Number(sort_value) })
+        .skip(total)
+        .limit(limit)
+        .project({ _id: true, create_time: true, title, type })
+        .end();
+      ctx.body = { ok: true, data: list };
     } catch (error) {
-      log.error({ name: 'get_first_logic', error });
+      log.error({ name: 'get_logic_title', error });
 			ctx.body = { ok: false };
     }
   });
@@ -31,6 +41,7 @@ exports.main = async (event) => {
       const { list = [] } = await db.collection('logic')
         .aggregate()
         .match({ type })
+        .sort({ index: 1 })
         .limit(10000)
         .project({ title: true, index: true })
         .end();

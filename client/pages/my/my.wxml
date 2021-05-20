@@ -8,10 +8,10 @@
       <open-data type="userNickName"></open-data>
     </view>
   </view>
-  <row-cell title="我的收藏" link="/pages/my_star/my_star">
+  <row-cell title="我的收藏" link="/pages/list/list?type=star">
       <text slot="icon" class="iconfont icon-star"></text>
   </row-cell>
-  <row-cell title="历史记录" link="/pages/my_history/my_history">
+  <row-cell title="历史记录" link="/pages/list/list?type=history">
       <text slot="icon" class="iconfont icon-lishi"></text>
   </row-cell>
 </view>

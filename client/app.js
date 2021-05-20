@@ -28,16 +28,17 @@ App({
     const color_strs = ['light', 'yellow', 'green', 'dark'];
 
     /** ---------- 逻辑题目分类  ----------   */
-    const short = { title: '短篇逻辑推理', type: 'short' };
-    const long = { title: '长篇逻辑推理', type: 'long' };
+    const short = { title: '短篇推理', type: 'short' };
+    const long = { title: '长篇推理', type: 'long' };
     const math = { title: '数学推理', type: 'match' };
     const paradox = { title: '逻辑悖论', type: 'paradox' };
+    const category_list = [short, long, math, paradox];
     this.globalData = {
       page_colors,
       theme_colors,
       color_strs,
       bottom_active,
-      category_list: [short, long, math, paradox],
+      category_list,
       user: {},
     }
     const theme_index = wx.getStorageSync('theme_index');
@@ -69,7 +70,8 @@ App({
     const logic_read = wx.getStorageSync(key) || {};
     if (!id) return logic_read;
     logic_read[id] = new Date().valueOf();
-    wx.setStorage({ data: logic_read, key });
+    wx.setStorage({ data: logic_read, key }); // 更改阅读历史
+    wx.setStorage({ data: _id, key: `${type}_current` }); // 更改当前阅读
     return logic_read;
   },
 

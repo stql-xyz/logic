@@ -35,11 +35,6 @@
           "pathName": "pages/star/star",
           "query": "",
           "scene": null
-        },
-        {
-          "name": "pages/my_star/my_star",
-          "pathName": "pages/my_star/my_star",
-          "scene": null
         }
       ]
     }

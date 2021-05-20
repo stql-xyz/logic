@@ -1,8 +1,0 @@
-<!--client/pages/star/star.wxml-->
-<scroll-view class="page {{color_strs[theme_index]}}-page" scroll-y enable-back-to-top="true" scroll-with-animation="true" lower-threshold="100">
-  <view class="star-list">
-    <view class="star">32434</view>
-    <view class="star">3434</view>
-    <view class="star">3333</view>
-  </view>
-</scroll-view>

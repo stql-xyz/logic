@@ -1,6 +1,0 @@
-/* client/pages/star/star.wxss */
-.page {
-  background: var(--page-bg);
-  height: 100vh;
-  color: var(--theme-color);
-}

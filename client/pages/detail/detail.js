@@ -74,11 +74,11 @@ Page({
     try {
       const { data: logic } = await db.collection('logic').doc(logic_id).get();
       this.setData({ logic }, this.setLogicStar);
+      this.dealWithTitle();
     } catch (error) {
       COMFUN.showErr({ error, type: 'get_logic_byid' });
     }
     this.setData({ btn_loading: false });
-    this.dealWithTitle();
   },
   /** 获取是否喜欢、收藏 */
   async setLogicStar() {
@@ -96,9 +96,11 @@ Page({
   dealWithTitle () {
     const { logic, type } = this.data;
     wx.setNavigationBarTitle({ title: `第${logic.index}题: ${logic.title}` });
-    wx.setStorage({ data: logic._id, key: `${type}_current` });
     const logic_read = APP.setLogicRead(type, logic._id);
     this.setData({ logic_read });
+    // 增加阅读记录
+    const db = wx.cloud.database();
+    db.collection('user_read').add({ data: { logic_id: logic._id, create_time: db.serverDate() } });
   },
   /** ------------下一题------------ */
   jumpLogic (diff) {

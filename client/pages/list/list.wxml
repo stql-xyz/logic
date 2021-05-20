@@ -1,0 +1,34 @@
+<!-- client/pages/star/star.wxml -->
+<empty-data wx:if="{{!first && notice_list.length === 0}}" />
+<scroll-view wx:else class="page {{color_strs[theme_index]}}-page" scroll-y enable-back-to-top="true" scroll-with-animation="true" lower-threshold="100">
+  <view class="dropdown" bidntap="handleTitleTap">
+    <view id="category">
+      <text>{{drop_category}}</text>
+      <text class="iconfont icon-{{drop_active === 'category' ? 'up' : 'down'}}"></text>
+    </view>
+    <view id="sort">
+      <text>{{drop_sort}}</text>
+      <text class="iconfont icon-{{drop_active === 'sort' ? 'up' : 'down'}}"></text>
+    </view>
+    <!-- 浮动、dorpdown 下拉列表 -->
+    <view class="dropdown-list" wx:if="{{drop_active === 'category'}}" bindtap="handleCategoryTap">
+      <block wx:for="{{category_list}}" wx:key="key">
+        <view id="{{item.type}}">{{item.title}}</view>
+      </block>
+    </view>
+    <view class="dropdown-list" wx:if="{{drop_active === 'sort'}}" bindtap="handleSortTap">
+      <block wx:for="{{sort_list}}" wx:key="title">
+        <view id="{{item.title}}">{{item.title}}</view>
+      </block>
+    </view>
+  </view>
+  <view class="logic_list">
+    <view wx:for="{{logic_list}}" wx:key="_id" class="logic">
+      {{item.index}} -- {{item.title}} -- {{item.type}} -- {{item.create_time}}
+    </view>
+  </view>
+  <view class="bottom-tip">
+    <view wx:if="{{!first && loading}}" class="loading">正在加载中.......</view>
+    <view wx:elif="{{!first && down}}" class="down">已显示全部通知</view>
+  </view>
+</scroll-view>
