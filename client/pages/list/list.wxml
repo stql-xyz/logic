@@ -1,7 +1,7 @@
 <!-- client/pages/star/star.wxml -->
-<empty-data wx:if="{{!first && notice_list.length === 0}}" />
-<scroll-view wx:else class="page {{color_strs[theme_index]}}-page" scroll-y enable-back-to-top="true" scroll-with-animation="true" lower-threshold="100">
-  <view class="dropdown" bidntap="handleTitleTap">
+<empty-data wx:if="{{!first && logic_list.length === 0}}" />
+<scroll-view wx:elif="{{!first}}" class="page {{color_strs[theme_index]}}-page" scroll-y enable-back-to-top="true" scroll-with-animation="true" lower-threshold="100">
+  <view class="dropdown" bindtap="handleTitleTap">
     <view id="category">
       <text>{{drop_category}}</text>
       <text class="iconfont icon-{{drop_active === 'category' ? 'up' : 'down'}}"></text>

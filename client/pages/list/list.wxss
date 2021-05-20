@@ -4,6 +4,12 @@
   height: 100vh;
   color: var(--theme-color);
 }
+.dropdown {
+  background: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 /* 滚动底部样式 */
 .bottom-tip {
   height: 160rpx;

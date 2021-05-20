@@ -71,7 +71,7 @@ App({
     if (!id) return logic_read;
     logic_read[id] = new Date().valueOf();
     wx.setStorage({ data: logic_read, key }); // 更改阅读历史
-    wx.setStorage({ data: _id, key: `${type}_current` }); // 更改当前阅读
+    wx.setStorage({ data: id, key: `${type}_current` }); // 更改当前阅读
     return logic_read;
   },
 

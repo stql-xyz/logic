@@ -35,6 +35,12 @@
           "pathName": "pages/star/star",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/list/list",
+          "pathName": "pages/list/list",
+          "query": "type=user_read",
+          "scene": null
         }
       ]
     }

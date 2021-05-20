@@ -13,20 +13,25 @@ exports.main = async (event) => {
   const app = new TcbRouter({ event });
   app.router('get_user_logic', async (ctx) => {
     const { OPENID = '' } = cloud.getWXContext()
-    const { sort_type, sort_value, limit = 1000, total = 0, type } = event;
+    const { sort_type = 'create_time', sort_value = -1, limit = 1000, total = 0, type, db_type } = event;
+    console.log(OPENID);
     try {
-      const { list = [] } = await db.collection('logic_read')
+      const { list = [] } = await db.collection(db_type)
         .aggregate()
         .match({ _openid: OPENID })
         .lookup({ from: 'logic', localField: 'logic_id', foreignField: '_id', as: 'logic' })
 				.addFields({ logic: $.arrayElemAt(['$logic', 0]) })
-				.addFields({ 'logic.create_time': '$create_time' })
-				.replaceRoot({ newRoot: '$logic' })
-        .match({ type })
+        .match({ 'logic.type': type })
+        .group({ 
+          _id: '$logic._id',
+          title: $.first('$logic.title'),
+          type: $.first('$logic.type'),
+          index: $.first('$logic.index'),
+          create_time: $.last('$create_time')
+        })
         .sort({ [sort_type]: Number(sort_value) })
         .skip(total)
         .limit(limit)
-        .project({ _id: true, create_time: true, title, type })
         .end();
       ctx.body = { ok: true, data: list };
     } catch (error) {
