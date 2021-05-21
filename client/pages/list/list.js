@@ -15,7 +15,7 @@ Page({
       { sort_key: 'index', sort_value: -1, title: '题目降序' },
     ],
     /** 筛选与排序 显示文案 */
-    drop_category: '全部',
+    drop_category: '全部类别',
     drop_sort: '时间倒序',
     /** 激活下拉框 */
     drop_active: '',
