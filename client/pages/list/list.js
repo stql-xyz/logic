@@ -103,8 +103,15 @@ Page({
     this.setData({ drop_sort, query, ...init_val }, this.getLogicData);
     wx.setStorage({ data: drop_sort, key: `drop_sort_${this.data.type}` });
   },
+  setTitle(type) {
+    let title = '';
+    type === 'user_read' && (title = '历史记录');
+    type === 'user_star' && (title = '我的收藏');
+    title && wx.setNavigationBarTitle({ title });
+  },
   onLoad: function ({ type }) {
     this.setData({ type, theme_index: APP.getThemeIndex() });
+    this.setTitle(type);
     APP.setNavBar();
     const query = this.data.query;
     const drop_category = wx.getStorageSync(`drop_category_${type}`) || '全部';
