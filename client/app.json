@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/my/my",
     "pages/detail/detail",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/edit/edit"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

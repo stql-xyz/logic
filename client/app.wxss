@@ -2,3 +2,22 @@
 @import './style/var.wxss';
 @import './style/iconfont.wxss';
 @import './style/theme.wxss';
+
+.divider {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  box-sizing: border-box;
+  height: 1px;
+  border-top: 1px solid var(--negative);
+}
+.divider::before {
+  margin-right: 20rpx;
+}
+.divider::after {
+  margin-left: 20rpx;
+}

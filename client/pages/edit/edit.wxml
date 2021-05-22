@@ -1,0 +1,19 @@
+<!--client/pages/edit/edit.wxml-->
+<view class="page {{color_strs[theme_index]}}-page">
+  <view class="divider">标题</view>
+  <textarea model:value="{{title}}" class="title" auto-height="{{true}}"></textarea>
+  <view class="divider">题目</view>
+  <textarea model:value="{{content}}" class="content" auto-height="{{true}}"></textarea>
+  <block wx:if="{{answer}}">
+    <view class="divider">参考方案</view>
+    <block wx:for="{{answer}}" wx:key="index">
+      <textarea id="{{index}}" value="{{item}}" class="content" auto-height="{{true}}" bindinput="handleChange" placeholder="请输入参考方案"></textarea>
+    </block>
+    <button class="button" bindtap="addAnswer"> + 新增参考方案</button>
+  </block>
+
+  <view class="divider">备注</view>
+  <textarea model:value="{{desc}}" class="content" auto-height="{{true}}" placeholder="题目修改补充说明"></textarea>
+  <button class="button" bindtap="handleSubmit">提交修改</button>
+  <view class="bottom-tip">题目修改审核后会被更新</view>
+</view>

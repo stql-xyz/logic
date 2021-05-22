@@ -30,9 +30,15 @@
     </view>
   </view>
   <!-- <view class="comment">评论</view> -->
-  <button wx:if="{{logic}}" loading="{{btn_loading}}" class="next" hover-class="next-hover" bindtap="nextLogic">
-    <text wx:if="{{!btn_loading}}">下一题</text>
-  </button>
+  <view wx:if="{{logic}}" class="next">
+    <button hover-class="next-hover" loading="{{btn_loading}}" bindtap="nextLogic">
+      <text wx:if="{{!btn_loading}}">下一题</text>
+    </button>
+    <navigator class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
+      <text class="iconfont icon-edit"></text>
+      <text>编辑</text>
+    </navigator>
+  </view>
 </view>
 
 <view class="bottom {{color_strs[theme_index]}}-page {{bottom_bar==='list' ? 'bottom-radius':''}}">

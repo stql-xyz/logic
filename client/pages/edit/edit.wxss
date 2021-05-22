@@ -1,0 +1,28 @@
+/* client/pages/edit/edit.wxss */
+.page {
+  width: 120vw;
+  height: 100vh;
+  padding: var(--space-2);
+  padding-right: calc(var(--space-2) + 20vw);
+  box-sizing: border-box;
+  overflow-y: scroll;
+  background: var(--page-bg);
+  color: var(--theme-color);
+}
+.page textarea {
+  background: var(--question-bg);
+  margin: 20rpx auto;
+  padding: 20rpx;
+}
+.button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background: var(--question-bg);
+  color: var(--theme-color);
+}
+.bottom-tip {
+  color: var(--theme-color);
+  opacity: 0.3;
+  text-align: center;
+  margin-bottom: 50px;
+}

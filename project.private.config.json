@@ -41,6 +41,12 @@
           "pathName": "pages/list/list",
           "query": "type=user_read",
           "scene": null
+        },
+        {
+          "name": "pages/edit/edit",
+          "pathName": "pages/edit/edit",
+          "query": "logic_id=28ee4e3e60a5180a1a2e0f79499f8f2e",
+          "scene": null
         }
       ]
     }
