@@ -14,7 +14,6 @@ exports.main = async (event) => {
   app.router('get_user_logic', async (ctx) => {
     const { OPENID = '' } = cloud.getWXContext()
     const { sort_type = 'create_time', sort_value = -1, limit = 1000, total = 0, type, db_type } = event;
-    console.log(OPENID);
     try {
       const { list = [] } = await db.collection(db_type)
         .aggregate()

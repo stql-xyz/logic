@@ -69,7 +69,7 @@ App({
     const key = `${type}_read`;
     const logic_read = wx.getStorageSync(key) || {};
     if (!id) return logic_read;
-    logic_read[id] = new Date().valueOf();
+    logic_read[id] = 1;
     wx.setStorage({ data: logic_read, key }); // 更改阅读历史
     wx.setStorage({ data: id, key: `${type}_current` }); // 更改当前阅读
     return logic_read;

@@ -1,11 +1,8 @@
 /* components/mine/empty_data/empty_data.wxss */
 .empty-data {
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     width: 100vw;
-    height: 100%;
+    min-height: 60vh;
     box-sizing: border-box;
     overflow: hidden;
     flex-direction: column;
@@ -16,7 +13,10 @@
     color: var(--font-color-2);
     margin-bottom: var(--space-0);
     display: inline-block;
+    color: var(--theme-color);
+    opacity: 0.6;
 }
 .iconfont {
     font-size: 160rpx;
+    color: var(--negative);
 }

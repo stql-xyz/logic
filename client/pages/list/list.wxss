@@ -5,10 +5,77 @@
   color: var(--theme-color);
 }
 .dropdown {
-  background: red;
+  background: var(--list-title);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
+}
+.dropdown .iconfont {
+  color: var(--logic-title-active);
+  opacity: 0.4;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 10rpx;
+}
+.dropdown view {
+  width: 50%;
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+.drop-container {
+  width: 100vw;
+  position: absolute;
+  background: var(--list-title);
+}
+.drop-container .current {
+  color: var(--logic-title-active);
+}
+.dropdown-category {
+  border-bottom: 1px solid var(--negative);
+}
+.dropdown-category view {
+  padding: var(--space-4) var(--space-2);
+  border-top: 1px solid var(--negative);
+}
+.dropdown-sort {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--negative);
+}
+.dropdown-sort view {
+  width: 50%;
+  flex-basis: 50%;
+  padding: var(--space-4);
+  text-align: center;
+  box-sizing: border-box;
+  border-top: 1px solid var(--negative);
+}
+.dropdown-sort .border-left {
+  border-left: 1px solid var(--negative);
+}
+.logic_list {
+  border-bottom: 1px solid var(--negative);
+}
+.logic_list .logic{
+  padding: var(--space-4) var(--space-2);
+  border-top: 1px solid var(--negative);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logic_list .hover {
+  opacity: 0.5;
+}
+.logic_list .title {
+  flex: 1;
+}
+.logic_list .time {
+  color: var(--logic-title);
+  font-size: var(--font-size-3);
 }
 /* 滚动底部样式 */
 .bottom-tip {
