@@ -10,6 +10,7 @@
   justify-content: space-around;
   align-items: center;
   position: relative;
+  z-index: 9999;
 }
 .dropdown .iconfont {
   color: var(--logic-title-active);
@@ -28,6 +29,7 @@
   width: 100vw;
   position: absolute;
   background: var(--list-title);
+  z-index: 9999;
 }
 .drop-container .current {
   color: var(--logic-title-active);
