@@ -61,6 +61,7 @@ Page({
   logic_cache: {},
   async getLogicById(logic_id) {
     if (this.data.btn_loading || !logic_id) return;
+    this.setData({ show_answer: false }); // 关闭答案
     const { logic: old_logic } = this.data;
     /** 先保存缓存、来不及保存star, 也会缓存； 有缓存的直接返回 */
     this.logic_cache[old_logic._id] = old_logic;
@@ -83,6 +84,7 @@ Page({
   /** 获取是否喜欢、收藏 */
   async setLogicStar() {
     const { logic } = this.data;
+    if (!logic) return;
     const db = wx.cloud.database();
     try {
       const { total: star_total  } = await db.collection('user_star').where({ logic_id: logic._id }).count();
@@ -95,6 +97,7 @@ Page({
   /** 处理已阅读、标题  */
   dealWithTitle () {
     const { logic, type } = this.data;
+    if (!logic) return;
     wx.setNavigationBarTitle({ title: `第${logic.index}题: ${logic.title}` });
     const logic_read = APP.setLogicRead(type, logic._id);
     this.setData({ logic_read });
@@ -169,13 +172,20 @@ Page({
         // 刚进入页面不用cache
         const db = wx.cloud.database();
         const new_logic_id = logic_id || wx.getStorageSync(`${type}_current`);
+        let logic = '';
         if (new_logic_id) {
-          const { data: logic } = await db.collection('logic').doc(new_logic_id).get();
-          this.setData({ logic });
-        } else {
-          const { data: [logic] } = await db.collection('logic').where({ index: 1, type }).get();
-          this.setData({ logic });
+          try {
+            const idLogic = await db.collection('logic').doc(new_logic_id).get();
+            logic = idLogic.data;
+          } catch (error) {
+            console.log(error);
+          }
         }
+        if (!logic) {
+          const typeLogicList = await db.collection('logic').where({ index: 1, type }).get();
+          logic = typeLogicList.data[0];
+        }
+        this.setData({ logic });
         this.setLogicStar();
         this.dealWithTitle();
         wx.hideLoading();
