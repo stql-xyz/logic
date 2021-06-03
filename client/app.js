@@ -43,6 +43,8 @@ App({
     }
     const theme_index = wx.getStorageSync('theme_index');
     this.globalData.theme_index = theme_index;
+
+    this.initLogicRead();
   },
 
   getThemeIndex() {
@@ -74,5 +76,20 @@ App({
     wx.setStorage({ data: id, key: `${type}_current` }); // 更改当前阅读
     return logic_read;
   },
+
+  async initLogicRead() {
+    try {
+      const { result: { data = [] } } = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_user_read' }});
+      data.forEach(item => {
+        const { _id, logic_read = [] } = item;
+        const key = `${_id}_read`;
+        const read_map = wx.getStorageSync(key) || {};
+        logic_read.forEach(it => read_map[it] = 1);
+        wx.setStorage({ data: read_map, key });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 })

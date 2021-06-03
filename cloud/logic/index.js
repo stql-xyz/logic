@@ -11,8 +11,28 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event) => {
   const app = new TcbRouter({ event });
+  /**用户已读 */
+  app.router('get_user_read', async (ctx) => {
+    const { OPENID = '' } = cloud.getWXContext();
+    try {
+      const { list = [] } = await db.collection('user_read')
+        .aggregate()
+        .match({ _openid: OPENID })
+        .group({ _id: '$logic_id' })
+        .project({ _id: true })
+        .lookup({ from: 'logic', localField: '_id', foreignField: '_id', as: 'logic' })
+				.replaceRoot({ newRoot: $.arrayElemAt(['$logic', 0]) })
+        .group({ _id: '$type', logic_read: $.push('$_id') })
+        .end();
+      ctx.body = { ok: true, data: list };
+    } catch (error) {
+      log.error({ name: 'get_logic_title', error });
+			ctx.body = { ok: false };
+    }
+  });
+  /** 用户操作相关列表 */
   app.router('get_user_logic', async (ctx) => {
-    const { OPENID = '' } = cloud.getWXContext()
+    const { OPENID = '' } = cloud.getWXContext();
     const { sort_type = 'create_time', sort_value = -1, limit = 1000, total = 0, type, db_type } = event;
     try {
       const { list = [] } = await db.collection(db_type)
