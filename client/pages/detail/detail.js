@@ -147,7 +147,7 @@ Page({
   },
   /** 切换列表 */
   handleLogicList(event) {
-    const { id } = event.target
+    const { id } = event.target.dataset
     if (!id) return;
     this.vibrate();
     this.getLogicById(id);
@@ -191,6 +191,7 @@ Page({
         wx.hideLoading();
         const cloud_res_title = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_logic_title', type }});
         COMFUN.result(cloud_res_title).success(({ data }) => this.setData({ logic_title: data }));
+        setTimeout(() => this.setData({ logic }), 100);
     } catch (error) {
       wx.hideLoading();
       COMFUN.showErr({ error, type: 'init_detail' });

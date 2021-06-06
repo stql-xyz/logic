@@ -28,11 +28,10 @@ App({
     const color_strs = ['light', 'yellow', 'green', 'dark'];
 
     /** ---------- 逻辑题目分类  ----------   */
-    const short = { title: '短篇推理', type: 'short' };
-    const long = { title: '长篇推理', type: 'long' };
-    const math = { title: '数学推理', type: 'match' };
-    const paradox = { title: '逻辑悖论', type: 'paradox' };
-    const category_list = [short, long, math, paradox];
+    const classic = { title: '经典推理', type: 'classic' };
+    const detective = { title: '侦探推理', type: 'detective' };
+    const brain = { title: '脑筋急转弯', type: 'brain' };
+    const category_list = [classic, detective, brain];
     this.globalData = {
       page_colors,
       theme_colors,

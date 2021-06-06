@@ -14,7 +14,7 @@
       <view style="padding: 10px" bindtap="findAnswer">
         <view class="find-ans {{show_answer ? 'ans-active': ''}}">
           <text class="iconfont icon-eye"></text>
-          <text>参考方案</text>
+          <text>参考答案</text>
         </view>
       </view>
       <button class="share-btn" open-type="share" bindtap="vibrate">
@@ -49,17 +49,17 @@
       </view>
     </block>
   </view>
-  <view hidden="{{bottom_bar!=='list'}}" class="list-bar" catchtap="handleLogicList">
+  <view wx:if="{{bottom_bar==='list'}}" class="list-bar" catchtap="handleLogicList">
     <view class="list-top"> 
       <view>{{logic_topic}}</view>
     </view>
-    <view class="list">
+    <scroll-view class="list" scroll-y="true" scroll-into-view="{{'key' + logic._id }}">
       <block wx:for="{{logic_title}}" wx:key="_id">
-        <view id="{{item._id}}" class="list-item{{logic_read[item._id] ? ' read':''}}{{item._id===logic._id ? ' current':''}}">
+        <view data-id="{{item._id}}" id="{{'key' + item._id }}" class="list-item{{logic_read[item._id] ? ' read':''}}{{item._id===logic._id ? ' current':''}}">
           第 {{item.index}} 题: {{item.title}}
         </view>
       </block>
-    </view>
+    </scroll-view>
   </view>
   <view class="bottom-bar" catchtap="handleBottomBar">
     <view id="left" class="iconfont icon-left"></view>

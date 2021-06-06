@@ -5,11 +5,11 @@
   <view class="divider">题目</view>
   <textarea model:value="{{content}}" class="content" auto-height="{{true}}"></textarea>
   <block wx:if="{{answer}}">
-    <view class="divider">参考方案</view>
+    <view class="divider">参考答案</view>
     <block wx:for="{{answer}}" wx:key="index">
-      <textarea id="{{index}}" value="{{item}}" class="content" auto-height="{{true}}" bindinput="handleChange" placeholder="请输入参考方案"></textarea>
+      <textarea id="{{index}}" value="{{item}}" class="content" auto-height="{{true}}" bindinput="handleChange" placeholder="请输入参考答案"></textarea>
     </block>
-    <button class="button" bindtap="addAnswer"> + 新增参考方案</button>
+    <button class="button" bindtap="addAnswer"> + 新增参考答案</button>
   </block>
 
   <view class="divider">备注</view>
