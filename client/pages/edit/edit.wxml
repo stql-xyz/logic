@@ -12,8 +12,8 @@
     <button class="button" bindtap="addAnswer"> + 新增参考答案</button>
   </block>
 
-  <view class="divider">备注</view>
-  <textarea model:value="{{desc}}" class="content" auto-height="{{true}}" placeholder="题目修改补充说明"></textarea>
+  <view class="divider">评论</view>
+  <textarea model:value="{{desc}}" class="content" auto-height="{{true}}" placeholder="留下你的思考足迹"></textarea>
   <button class="button" bindtap="handleSubmit">提交修改</button>
   <view class="bottom-tip">题目修改审核后会被更新</view>
 </view>

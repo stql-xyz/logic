@@ -2,8 +2,8 @@
 .page {
   width: 120vw;
   height: 100vh;
-  padding: var(--space-2);
-  padding-right: calc(var(--space-2) + 20vw);
+  padding: var(--space-2) 0;
+  padding-right: 20vw;
   box-sizing: border-box;
   overflow-y: scroll;
   background: var(--page-bg);

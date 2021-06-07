@@ -26,7 +26,7 @@ exports.main = async (event) => {
         .end();
       ctx.body = { ok: true, data: list };
     } catch (error) {
-      log.error({ name: 'get_logic_title', error });
+      log.error({ name: 'get_user_read', error });
 			ctx.body = { ok: false };
     }
   });
@@ -54,7 +54,7 @@ exports.main = async (event) => {
         .end();
       ctx.body = { ok: true, data: list };
     } catch (error) {
-      log.error({ name: 'get_logic_title', error });
+      log.error({ name: 'get_user_logic', error });
 			ctx.body = { ok: false };
     }
   });
