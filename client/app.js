@@ -29,9 +29,8 @@ App({
 
     /** ---------- 逻辑题目分类  ----------   */
     const classic = { title: '经典推理', type: 'classic' };
-    const detective = { title: '侦探推理', type: 'detective' };
-    const brain = { title: '脑筋急转弯', type: 'brain' };
-    const category_list = [classic, detective, brain];
+    const story = { title: '推理小故事', type: 'story' };
+    const category_list = [classic, story];
     this.globalData = {
       page_colors,
       theme_colors,
