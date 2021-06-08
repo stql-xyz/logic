@@ -13,7 +13,7 @@ Page({
 
   vibrate: COMFUN.vibrate,
 
-  onLoad(options) {
+  onLoad() {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();

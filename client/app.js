@@ -1,8 +1,8 @@
-import COMFUN from './utils/comfun';
 // app.js
 App({
   onLaunch() {
     if (!wx.cloud) {
+      /* eslint-disable-next-line no-console */
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
       wx.cloud.init({
@@ -54,15 +54,27 @@ App({
   setTabBar() {
     const theme_index = this.getThemeIndex();
     const { theme_colors, color_strs, bottom_active } = this.globalData;
-    wx.setTabBarStyle({ backgroundColor: theme_colors[theme_index], selectedColor: bottom_active[theme_index] });
-    wx.setTabBarItem({ index: 0, selectedIconPath: `images/home@${color_strs[theme_index]}.png` });
-    wx.setTabBarItem({ index: 1, selectedIconPath: `images/my@${color_strs[theme_index]}.png` });
+    wx.setTabBarStyle({
+      backgroundColor: theme_colors[theme_index],
+      selectedColor: bottom_active[theme_index],
+    });
+    wx.setTabBarItem({
+      index: 0,
+      selectedIconPath: `images/home@${color_strs[theme_index]}.png`,
+    });
+    wx.setTabBarItem({
+      index: 1,
+      selectedIconPath: `images/my@${color_strs[theme_index]}.png`,
+    });
   },
   setNavBar() {
     const theme_index = this.getThemeIndex();
     const { page_colors } = this.globalData;
     const frontColors = ['#000000', '#000000', '#000000', '#ffffff'];
-    wx.setNavigationBarColor({ backgroundColor: page_colors[theme_index], frontColor: frontColors[theme_index] });
+    wx.setNavigationBarColor({
+      backgroundColor: page_colors[theme_index],
+      frontColor: frontColors[theme_index],
+    });
   },
 
   setLogicRead(type, id) {
@@ -83,10 +95,11 @@ App({
         const { _id, logic_read = [] } = item;
         const key = `${_id}_read`;
         const read_map = wx.getStorageSync(key) || {};
-        logic_read.forEach((it) => read_map[it] = 1);
+        logic_read.forEach((it) => { read_map[it] = 1; });
         wx.setStorage({ data: read_map, key });
       });
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log(error);
     }
   },

@@ -53,8 +53,8 @@ Page({
     } = this.data;
     if (loading || down) return;
     const isShowLoading = (logic_list.length === 0);
-    isShowLoading && wx.showLoading({ title: '加载中' });
-    !isShowLoading && this.setData({ loading: true });
+    if (isShowLoading) wx.showLoading({ title: '加载中' });
+    else this.setData({ loading: true });
     try {
       const cloud_res = await wx.cloud.callFunction({
         name: 'logic',
@@ -63,7 +63,10 @@ Page({
         },
       });
       COMFUN.result(cloud_res).success(({ data }) => {
-        const n_data = data.map((item) => ({ ...item, create_time: COMFUN.formatDate2Str(item.create_time) }));
+        const n_data = data.map((item) => ({
+          ...item,
+          create_time: COMFUN.formatDate2Str(item.create_time),
+        }));
         this.setData({
           logic_list: logic_list.concat(n_data),
           first: false,
@@ -73,8 +76,8 @@ Page({
     } catch (error) {
       COMFUN.showErr({ type: 'get_star_data', error });
     }
-    isShowLoading && wx.hideLoading();
-    !isShowLoading && this.setData({ loading: false });
+    if (isShowLoading) wx.hideLoading();
+    else this.setData({ loading: false });
     this.setData({ wxloading: false });
   },
   /** 顶部导航栏点击 */
@@ -87,21 +90,22 @@ Page({
   },
   handleCategoryTap(event) {
     const { id: type } = event.target;
-    if (typeof type !== 'string') return;
+    if (typeof type !== 'string') return {};
     COMFUN.vibrate();
     const { title: drop_category } = this.data.category_list.find((item) => item.type === type);
     if (drop_category === this.data.drop_category) return this.setData({ drop_active: '' });
     const query = { ...this.data.query, type };
-    !type && (delete query.type);
+    if (!type) (delete query.type);
     const init_val = {
       drop_active: '', logic_list: [], wxloading: true, down: false, loading: false,
     };
     this.setData({ drop_category, query, ...init_val }, this.getLogicData);
     wx.setStorage({ data: drop_category, key: `drop_category_${this.data.type}` });
+    return {};
   },
   handleSortTap(event) {
     const { id: drop_sort } = event.target;
-    if (!drop_sort) return;
+    if (!drop_sort) return {};
     COMFUN.vibrate();
     if (drop_sort === this.data.drop_sort) return this.setData({ drop_active: '' });
     const { sort_key, sort_value } = this.data.sort_list.find((item) => item.title === drop_sort);
@@ -111,12 +115,13 @@ Page({
     };
     this.setData({ drop_sort, query, ...init_val }, this.getLogicData);
     wx.setStorage({ data: drop_sort, key: `drop_sort_${this.data.type}` });
+    return {};
   },
   setTitle(type) {
     let title = '';
-    type === 'user_read' && (title = '历史记录');
-    type === 'user_star' && (title = '我的收藏');
-    title && wx.setNavigationBarTitle({ title });
+    if (type === 'user_read') title = '历史记录';
+    if (type === 'user_star') title = '我的收藏';
+    if (title) wx.setNavigationBarTitle({ title });
   },
   onLoad({ type }) {
     this.setData({ type, theme_index: APP.getThemeIndex() });
@@ -125,10 +130,14 @@ Page({
     const { query } = this.data;
     const drop_category = wx.getStorageSync(`drop_category_${type}`) || '全部';
     const { type: category_type } = category_list.find((item) => item.title === drop_category);
-    category_type && (query.type = category_type);
+    if (category_type) query.type = category_type;
     const drop_sort = wx.getStorageSync(`drop_sort_${type}`) || '时间倒序';
     const { sort_key, sort_value } = sort_list.find((item) => item.title === drop_sort);
-    this.setData({ drop_category, drop_sort, query: { ...query, sort_key, sort_value } }, this.getLogicData);
+    this.setData({
+      drop_category,
+      drop_sort,
+      query: { ...query, sort_key, sort_value },
+    }, this.getLogicData);
   },
   onShow() {
     this.setData({ theme_index: APP.getThemeIndex() });

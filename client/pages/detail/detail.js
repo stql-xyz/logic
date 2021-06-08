@@ -56,12 +56,12 @@ Page({
     this.setData({ logic });
     wx.hideLoading();
     this.is_staring = false;
-    tipStr && wx.showToast({ title: tipStr });
+    if (tipStr) wx.showToast({ title: tipStr });
   },
   /** ------------获取页面数据------------ */
   logic_cache: {},
   async getLogicById(logic_id) {
-    if (this.data.btn_loading || !logic_id) return;
+    if (this.data.btn_loading || !logic_id) return {};
     this.setData({ show_answer: false }); // 关闭答案
     const { logic: old_logic } = this.data;
     /** 先保存缓存、来不及保存star, 也会缓存； 有缓存的直接返回 */
@@ -81,6 +81,7 @@ Page({
       COMFUN.showErr({ error, type: 'get_logic_byid' });
     }
     this.setData({ btn_loading: false });
+    return {};
   },
   /** 获取是否喜欢、收藏 */
   async setLogicStar() {
@@ -90,7 +91,7 @@ Page({
     try {
       const { total: star_total } = await db.collection('user_star').where({ logic_id: logic._id }).count();
       logic.is_star = (star_total > 0);
-      (logic._id === this.data.logic._id) && this.setData({ logic }); // 防止迅速跳转
+      if (logic._id === this.data.logic._id) this.setData({ logic }); // 防止迅速跳转
     } catch (error) {
       COMFUN.showErr({ error, type: 'get_logic_star' });
     }
@@ -133,7 +134,7 @@ Page({
   /** 底部导航栏点击 */
   handleBottomBar(event) {
     const { id } = event.target;
-    if (!id) return;
+    if (!id) return {};
     this.vibrate();
     if (id === 'star') {
       this.handleIsStar();
@@ -179,12 +180,13 @@ Page({
           const idLogic = await db.collection('logic').doc(new_logic_id).get();
           logic = idLogic.data;
         } catch (error) {
+          /* eslint-disable-next-line no-console */
           console.log(error);
         }
       }
       if (!logic) {
         const typeLogicList = await db.collection('logic').where({ index: 1, type }).get();
-        logic = typeLogicList.data[0];
+        [logic] = typeLogicList.data;
       }
       this.setData({ logic });
       this.setLogicStar();
