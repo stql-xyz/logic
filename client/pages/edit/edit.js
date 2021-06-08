@@ -1,4 +1,5 @@
-import COMFUN from "../../utils/comfun";
+import COMFUN from '../../utils/comfun';
+
 const APP = getApp();
 const AppGlobalData = getApp().globalData;
 Page({
@@ -11,11 +12,17 @@ Page({
     answer: '',
   },
   async handleSubmit() {
-    const { title, content, answer, desc } = this.data;
+    const {
+      title, content, answer, desc,
+    } = this.data;
     wx.showLoading({ title: '修改中' });
     try {
       const db = wx.cloud.database();
-      await db.collection('logic_edit').add({ data: { title, content, answer, desc }});
+      await db.collection('logic_edit').add({
+        data: {
+          title, content, answer, desc,
+        },
+      });
     } catch (error) {
       COMFUN.showErr({ error, type: 'submit_edit_logic' });
     }
@@ -41,21 +48,21 @@ Page({
     if (!id) return;
     const { answer } = this.data;
     answer[Number(id)] = value;
-    this.setData({ answer }); 
+    this.setData({ answer });
   },
   addAnswer() {
     const { answer = [] } = this.data;
     answer.push('');
     this.setData({ answer });
   },
-  onLoad: function (options) {
+  onLoad(options) {
     const { logic_id } = options;
     this.setData({ logic_id, theme_index: APP.getThemeIndex() }, this.getData);
     APP.setNavBar();
   },
-  onShow: function () {
+  onShow() {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setNavBar();
   },
 
-})
+});

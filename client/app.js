@@ -1,14 +1,14 @@
 import COMFUN from './utils/comfun';
-//app.js
+// app.js
 App({
-  onLaunch: function () {
+  onLaunch() {
     if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
       wx.cloud.init({
         env: 'dev-0ghevqyr89320879',
         traceUser: true,
-      })
+      });
     }
     /** 页面背景 */
     const page_light = '#F6F6F6';
@@ -39,7 +39,7 @@ App({
       bottom_active,
       category_list,
       user: {},
-    }
+    };
     const theme_index = wx.getStorageSync('theme_index');
     this.globalData.theme_index = theme_index;
 
@@ -47,7 +47,7 @@ App({
   },
 
   getThemeIndex() {
-    const theme_index = this.globalData.theme_index;
+    const { theme_index } = this.globalData;
     return typeof theme_index === 'number' ? theme_index : 2;
   },
 
@@ -61,7 +61,7 @@ App({
   setNavBar() {
     const theme_index = this.getThemeIndex();
     const { page_colors } = this.globalData;
-    const frontColors = ['#000000', '#000000', '#000000', '#ffffff' ]
+    const frontColors = ['#000000', '#000000', '#000000', '#ffffff'];
     wx.setNavigationBarColor({ backgroundColor: page_colors[theme_index], frontColor: frontColors[theme_index] });
   },
 
@@ -78,17 +78,17 @@ App({
 
   async initLogicRead() {
     try {
-      const { result: { data = [] } } = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_user_read' }});
-      data.forEach(item => {
+      const { result: { data = [] } } = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_user_read' } });
+      data.forEach((item) => {
         const { _id, logic_read = [] } = item;
         const key = `${_id}_read`;
         const read_map = wx.getStorageSync(key) || {};
-        logic_read.forEach(it => read_map[it] = 1);
+        logic_read.forEach((it) => read_map[it] = 1);
         wx.setStorage({ data: read_map, key });
       });
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 
-})
+});

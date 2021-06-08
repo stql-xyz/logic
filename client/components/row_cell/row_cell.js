@@ -1,34 +1,34 @@
 // components/mine/row_cell/row_cell.js
 Component({
-	options: {
-		addGlobalClass: true,
-		multipleSlots: true,
-	},
+  options: {
+    addGlobalClass: true,
+    multipleSlots: true,
+  },
 
-	properties: {
-		title: {
-			type: String,
-			value: '',
-		},
-		footer: {
-			type: String,
-			value: '',
-		},
-		link: {
-			type: String,
-			value: '',
-		},
-	},
+  properties: {
+    title: {
+      type: String,
+      value: '',
+    },
+    footer: {
+      type: String,
+      value: '',
+    },
+    link: {
+      type: String,
+      value: '',
+    },
+  },
 
-	data: {},
+  data: {},
 
-	methods: {
-		handleClick() {
-			const { link } = this.properties;
-			if (link) {
-				wx.vibrateShort({ type: 'heavy' });
-				wx.navigateTo({ url: link });
-			}
-		},
-	},
+  methods: {
+    handleClick() {
+      const { link } = this.properties;
+      if (link) {
+        wx.vibrateShort({ type: 'heavy' });
+        wx.navigateTo({ url: link });
+      }
+    },
+  },
 });

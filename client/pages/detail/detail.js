@@ -1,5 +1,6 @@
 // client/pages/detail/detail.js
 import COMFUN from '../../utils/comfun';
+
 const APP = getApp();
 const AppGlobalData = getApp().globalData;
 Page({
@@ -45,7 +46,7 @@ Page({
         logic.is_star = false;
         tipStr = '已取消收藏';
       } else {
-        await db.collection('user_star').add({ data: { logic_id: logic._id, create_time: db.serverDate() }});
+        await db.collection('user_star').add({ data: { logic_id: logic._id, create_time: db.serverDate() } });
         logic.is_star = true;
         tipStr = '已收藏';
       }
@@ -87,7 +88,7 @@ Page({
     if (!logic) return;
     const db = wx.cloud.database();
     try {
-      const { total: star_total  } = await db.collection('user_star').where({ logic_id: logic._id }).count();
+      const { total: star_total } = await db.collection('user_star').where({ logic_id: logic._id }).count();
       logic.is_star = (star_total > 0);
       (logic._id === this.data.logic._id) && this.setData({ logic }); // 防止迅速跳转
     } catch (error) {
@@ -95,7 +96,7 @@ Page({
     }
   },
   /** 处理已阅读、标题  */
-  dealWithTitle () {
+  dealWithTitle() {
     const { logic, type } = this.data;
     if (!logic) return;
     wx.setNavigationBarTitle({ title: `第${logic.index}题: ${logic.title}` });
@@ -106,11 +107,11 @@ Page({
     db.collection('user_read').add({ data: { logic_id: logic._id, create_time: db.serverDate() } });
   },
   /** ------------下一题------------ */
-  jumpLogic (diff) {
+  jumpLogic(diff) {
     if (!diff) return;
     this.vibrate();
     const { logic, logic_title } = this.data;
-    const index = logic_title.findIndex(item => item._id === logic._id);
+    const index = logic_title.findIndex((item) => item._id === logic._id);
     const result = logic_title[index + diff];
     if (!result) {
       const content = (diff > 0) ? '已看完全部题目' : '前面没有题目了';
@@ -147,7 +148,7 @@ Page({
   },
   /** 切换列表 */
   handleLogicList(event) {
-    const { id } = event.target.dataset
+    const { id } = event.target.dataset;
     if (!id) return;
     this.vibrate();
     this.getLogicById(id);
@@ -164,48 +165,48 @@ Page({
     APP.setNavBar();
   },
   /** ------------周期函数------------- */
-  onLoad: async function (options) {
+  async onLoad(options) {
     const { type, logic_id } = options;
     this.setData({ theme_index: APP.getThemeIndex(), type });
     wx.showLoading({ title: '加载中...' });
     try {
-        // 刚进入页面不用cache
-        const db = wx.cloud.database();
-        const new_logic_id = logic_id || wx.getStorageSync(`${type}_current`);
-        let logic = '';
-        if (new_logic_id) {
-          try {
-            const idLogic = await db.collection('logic').doc(new_logic_id).get();
-            logic = idLogic.data;
-          } catch (error) {
-            console.log(error);
-          }
+      // 刚进入页面不用cache
+      const db = wx.cloud.database();
+      const new_logic_id = logic_id || wx.getStorageSync(`${type}_current`);
+      let logic = '';
+      if (new_logic_id) {
+        try {
+          const idLogic = await db.collection('logic').doc(new_logic_id).get();
+          logic = idLogic.data;
+        } catch (error) {
+          console.log(error);
         }
-        if (!logic) {
-          const typeLogicList = await db.collection('logic').where({ index: 1, type }).get();
-          logic = typeLogicList.data[0];
-        }
-        this.setData({ logic });
-        this.setLogicStar();
-        this.dealWithTitle();
-        wx.hideLoading();
-        const cloud_res_title = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_logic_title', type }});
-        COMFUN.result(cloud_res_title).success(({ data }) => this.setData({ logic_title: data }));
-        setTimeout(() => this.setData({ logic }), 100);
+      }
+      if (!logic) {
+        const typeLogicList = await db.collection('logic').where({ index: 1, type }).get();
+        logic = typeLogicList.data[0];
+      }
+      this.setData({ logic });
+      this.setLogicStar();
+      this.dealWithTitle();
+      wx.hideLoading();
+      const cloud_res_title = await wx.cloud.callFunction({ name: 'logic', data: { $url: 'get_logic_title', type } });
+      COMFUN.result(cloud_res_title).success(({ data }) => this.setData({ logic_title: data }));
+      setTimeout(() => this.setData({ logic }), 100);
     } catch (error) {
       wx.hideLoading();
       COMFUN.showErr({ error, type: 'init_detail' });
     }
     /** 设置标题顶部与是否阅读 */
-    const { title: logic_topic } = AppGlobalData.category_list.find(item => item.type === type);
+    const { title: logic_topic } = AppGlobalData.category_list.find((item) => item.type === type);
     const logic_read = APP.setLogicRead(type);
     this.setData({ logic_topic, logic_read });
     APP.setNavBar();
   },
-  onShareAppMessage: function () {
+  onShareAppMessage() {
     const { logic, type } = this.data;
-    const title = logic.title;
+    const { title } = logic;
     const path = `/pages/detail/detail?type=${type}&logic_id=${logic._id}`;
     return { title, path };
   },
-})
+});

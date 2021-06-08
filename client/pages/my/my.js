@@ -1,5 +1,6 @@
 // client/pages/my/my.js
 import COMFUN from '../../utils/comfun';
+
 const APP = getApp();
 const AppGlobalData = APP.globalData;
 Page({
@@ -9,27 +10,27 @@ Page({
     color_strs: AppGlobalData.color_strs,
   },
 
-  onLoad: function (options) {
+  onLoad(options) {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();
   },
 
-  onReady: function () {
+  onReady() {
 
   },
 
-  onShow: function () {
+  onShow() {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
 
   },
 
-  onTabItemTap: function () {
+  onTabItemTap() {
     COMFUN.vibrate();
-  }
-})
+  },
+});
