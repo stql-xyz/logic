@@ -5,41 +5,49 @@
     background-color="{{page_colors[theme_index]}}"
   />
 </page-meta>
-<view class="page {{color_strs[theme_index]}}-page" bindtouchstart="handleTouchPage">
-  <view wx:if="{{logic}}" class="question">
-    <view class="question-content">
-      <text decode="{{true}}">{{logic.content}}</text>
-    </view>
-    <view class="question-action">
-      <view style="padding: 10px" bindtap="findAnswer">
-        <view class="find-ans {{show_answer ? 'ans-active': ''}}">
-          <text class="iconfont icon-eye"></text>
-          <text>参考答案</text>
+<scroll-view
+  scroll-y enable-back-to-top="true"
+  scroll-with-animation="{{false}}"
+  class="{{color_strs[theme_index]}}-page scroll"
+  scroll-top="{{pageTop}}"
+>
+  <view class="page" bindtouchstart="handleTouchPage">
+    <view wx:if="{{logic}}" class="question">
+      <view class="question-content">
+        <text decode="{{true}}">{{logic.content}}</text>
+      </view>
+      <view class="question-action">
+        <view style="padding: 10px" bindtap="findAnswer">
+          <view class="find-ans {{show_answer ? 'ans-active': ''}}">
+            <text class="iconfont icon-eye"></text>
+            <text>参考答案</text>
+          </view>
+        </view>
+        <button class="share-btn" open-type="share" bindtap="vibrate">
+          <view class="share">
+            <text class="iconfont icon-fenxiang"></text>
+          </view>
+        </button>
+      </view>
+      <view class="question-answer-list" wx:if="{{show_answer}}">
+        <view class="answer" wx:for="{{logic.answer}}" wx:key="*this">
+          <text decode="{{true}}">{{item}}</text>
         </view>
       </view>
-      <button class="share-btn" open-type="share" bindtap="vibrate">
-        <view class="share">
-          <text class="iconfont icon-fenxiang"></text>
-        </view>
+    </view>
+    <!-- <view class="comment">评论</view> -->
+    <view wx:if="{{logic}}" class="next">
+      <button hover-class="next-hover" loading="{{btn_loading}}" bindtap="nextLogic">
+        <text wx:if="{{!btn_loading}}">下一题</text>
       </button>
-    </view>
-    <view class="question-answer-list" wx:if="{{show_answer}}">
-      <view class="answer" wx:for="{{logic.answer}}" wx:key="*this">
-        <text decode="{{true}}">{{item}}</text>
-      </view>
+      <navigator class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
+        <text class="iconfont icon-edit"></text>
+        <text>编辑</text>
+      </navigator>
     </view>
   </view>
-  <!-- <view class="comment">评论</view> -->
-  <view wx:if="{{logic}}" class="next">
-    <button hover-class="next-hover" loading="{{btn_loading}}" bindtap="nextLogic">
-      <text wx:if="{{!btn_loading}}">下一题</text>
-    </button>
-    <navigator class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
-      <text class="iconfont icon-edit"></text>
-      <text>编辑</text>
-    </navigator>
-  </view>
-</view>
+</scroll-view>
+
 
 <view class="bottom {{color_strs[theme_index]}}-page {{bottom_bar==='list' ? 'bottom-radius':''}}">
   <view hidden="{{bottom_bar!=='sun'}}" class="color-bar" catchtap="handleThemeIndex">

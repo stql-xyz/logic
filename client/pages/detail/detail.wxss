@@ -1,20 +1,25 @@
 /* client/pages/detail/detail.wxss */
-.page {
+.scroll {
   width: 120vw;
   height: 100vh;
+  background: var(--page-bg);
+}
+.page {
+  width: 120vw;
   padding: var(--space-2) 0;
   padding-right: 20vw;
   box-sizing: border-box;
-  overflow-y: scroll;
   background: var(--page-bg);
   color: var(--theme-color);
+  font-size: var(--font-size-1);
+  line-height: 1.8em;
 }
 .question {
   min-height: 55vh;
 }
 .question-content {
   border-radius: 4px;
-  padding: var(--space-3);
+  padding: var(--space-1);
   background: var(--question-bg);
 }
 /** 行为 */
@@ -49,12 +54,13 @@
 }
 .share .iconfont {
   font-size: 40rpx;
-  color: var(--like);
+  /* color: var(--like); */
+  color: var(--theme-color);
 }
 /** 答案 */
 .answer {
   border-radius: 4px;
-  padding: var(--space-3);
+  padding: var(--space-1);
   background: var(--answer-bg);
   margin-bottom: 10px;
   position: relative;

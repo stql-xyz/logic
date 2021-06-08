@@ -6,6 +6,7 @@ const AppGlobalData = getApp().globalData;
 Page({
 
   data: {
+    pageTop: 0,
     type: '',
     /** 配色配置 */
     theme_index: 'unknow',
@@ -28,6 +29,7 @@ Page({
   vibrate: COMFUN.vibrate,
   /** ------------控制答案显示------------ */
   findAnswer() {
+    this.vibrate();
     this.setData({ show_answer: !this.data.show_answer });
   },
   /** ------------收藏------------ */
@@ -61,13 +63,13 @@ Page({
   /** ------------获取页面数据------------ */
   logic_cache: {},
   async getLogicById(logic_id) {
-    if (this.data.btn_loading || !logic_id) return {};
+    if (this.data.btn_loading || !logic_id) return this.setData({ pageTop: 0 });
     this.setData({ show_answer: false }); // 关闭答案
     const { logic: old_logic } = this.data;
     /** 先保存缓存、来不及保存star, 也会缓存； 有缓存的直接返回 */
     this.logic_cache[old_logic._id] = old_logic;
     if (this.logic_cache[logic_id]) {
-      this.setData({ logic: this.logic_cache[logic_id] });
+      this.setData({ logic: this.logic_cache[logic_id], pageTop: 0 });
       return this.dealWithTitle();
     }
     /** 没有缓存请求 */
@@ -81,7 +83,7 @@ Page({
       COMFUN.showErr({ error, type: 'get_logic_byid' });
     }
     this.setData({ btn_loading: false });
-    return {};
+    return this.setData({ pageTop: 0 });
   },
   /** 获取是否喜欢、收藏 */
   async setLogicStar() {
@@ -110,7 +112,6 @@ Page({
   /** ------------下一题------------ */
   jumpLogic(diff) {
     if (!diff) return;
-    this.vibrate();
     const { logic, logic_title } = this.data;
     const index = logic_title.findIndex((item) => item._id === logic._id);
     const result = logic_title[index + diff];
@@ -122,6 +123,7 @@ Page({
     }
   },
   nextLogic() {
+    this.vibrate();
     this.jumpLogic(1);
   },
   /** ------------底部处理------------- */
