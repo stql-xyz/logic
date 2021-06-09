@@ -61,15 +61,16 @@ Page({
     if (tipStr) wx.showToast({ title: tipStr });
   },
   /** ------------获取页面数据------------ */
+  goTop: () => setTimeout(() => this.setData({ pageTop: 0 }), 10),
   logic_cache: {},
   async getLogicById(logic_id) {
-    if (this.data.btn_loading || !logic_id) return this.setData({ pageTop: 0 });
+    if (this.data.btn_loading || !logic_id) return {};
     this.setData({ show_answer: false }); // 关闭答案
     const { logic: old_logic } = this.data;
     /** 先保存缓存、来不及保存star, 也会缓存； 有缓存的直接返回 */
     this.logic_cache[old_logic._id] = old_logic;
     if (this.logic_cache[logic_id]) {
-      this.setData({ logic: this.logic_cache[logic_id], pageTop: 0 });
+      this.setData({ logic: this.logic_cache[logic_id] }, this.goTop);
       return this.dealWithTitle();
     }
     /** 没有缓存请求 */
@@ -82,8 +83,8 @@ Page({
     } catch (error) {
       COMFUN.showErr({ error, type: 'get_logic_byid' });
     }
-    this.setData({ btn_loading: false });
-    return this.setData({ pageTop: 0 });
+    this.setData({ btn_loading: false }, this.goTop);
+    return {};
   },
   /** 获取是否喜欢、收藏 */
   async setLogicStar() {
