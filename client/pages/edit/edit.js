@@ -35,7 +35,9 @@ Page({
       const { logic_id } = this.data;
       const db = wx.cloud.database();
       const { data: logic } = await db.collection('logic').doc(logic_id).get();
-      const { title, content, answer } = logic;
+      const { title } = logic;
+      const content = logic.content.replaceAll('&emsp;', '');
+      const answer = logic.answer.map(item => item.replaceAll('&emsp;', ''));
       this.setData({ title, content, answer });
     } catch (error) {
       COMFUN.showErr({ error, type: 'get_edit_data' });
