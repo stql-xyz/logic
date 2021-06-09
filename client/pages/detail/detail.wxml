@@ -42,7 +42,7 @@
       </button>
       <navigator class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
         <text class="iconfont icon-edit"></text>
-        <text>编辑</text>
+        <!-- <text>编辑</text> -->
       </navigator>
     </view>
   </view>
