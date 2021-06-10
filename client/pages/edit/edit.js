@@ -6,6 +6,7 @@ Page({
   data: {
     theme_index: 'unknow',
     color_strs: AppGlobalData.color_strs,
+    logic_id: '',
     title: '',
     content: '',
     desc: '',
@@ -13,14 +14,14 @@ Page({
   },
   async handleSubmit() {
     const {
-      title, content, answer, desc,
+      title, content, answer, desc, logic_id,
     } = this.data;
     wx.showLoading({ title: '修改中' });
     try {
       const db = wx.cloud.database();
       await db.collection('logic_edit').add({
         data: {
-          title, content, answer, desc,
+          logic_id, title, content, answer, desc,
         },
       });
     } catch (error) {
