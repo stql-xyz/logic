@@ -46,7 +46,7 @@ exports.main = async (event) => {
           c_month: $.month('$create_time'),
         })
         .match({ c_year: year, c_month: month })
-        .group({ _id: inviter, num: $.sum(1) })
+        .group({ _id: '$inviter', num: $.sum(1) })
 				.lookup({ from: 'user', localField: '_id', foreignField: '_openid', as: 'userinfo' })
 				.addFields({ user_info: $.arrayElemAt(['$userinfo', 0]) })
         .project({ _id: true, num: true, 'userinfo.avatar': true, 'userinfo.nickname': true })
@@ -54,7 +54,7 @@ exports.main = async (event) => {
         .sort({ _id: -1 })
         .limit(3)
         .end();
-      const { total: inviter_count } = await db.collection('user')
+      const { list: [ { inviter_count = 0 } = {} ]} = await db.collection('user')
         .aggregate()
         .match({ inviter: OPENID })
         .project({
@@ -62,8 +62,9 @@ exports.main = async (event) => {
           c_month: $.month('$create_time'),
         })
         .match({ c_year: year, c_month: month })
-        .count();
-      const { total: ranking } = await db.collection('user')
+        .count('inviter_count')
+        .end();
+      const { list : [ { ranking = 0 } = {} ]} = await db.collection('user')
         .aggregate()
         .match({ inviter: _.neq("") })
         .project({
@@ -71,10 +72,11 @@ exports.main = async (event) => {
           c_month: $.month('$create_time'),
         })
         .match({ c_year: year, c_month: month })
-        .group({ _id: inviter, num: $.sum(1) })
-        .match({ num: _.gt(inviter_count) })
-        .count();
-      ctx.body = { list, inviter_count, ranking: ranking + 1 };
+        .group({ _id: '$inviter', num: $.sum(1) })
+        .match({ num: _.gt(inviter_count.inviter_count) })
+        .count('ranking')
+        .end();
+      ctx.body = { ok: true, list, inviter_count, ranking };
     } catch (error) {
       log.error({ name: 'get_user_prize', error });
 			ctx.body = { ok: false };

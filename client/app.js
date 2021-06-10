@@ -1,7 +1,6 @@
 // app.js
 App({
   onLaunch(option) {
-    this.handleScene(option.scene);
     if (!wx.cloud) {
       /* eslint-disable-next-line no-console */
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
@@ -11,6 +10,7 @@ App({
         traceUser: true,
       });
     }
+    this.handleScene(option);
     /** 页面背景 */
     const page_light = '#F6F6F6';
     const page_yellow = '#f7f7d9';
@@ -40,6 +40,7 @@ App({
       bottom_active,
       category_list,
       user: {},
+      openid: '',
     };
     const theme_index = wx.getStorageSync('theme_index');
     this.globalData.theme_index = theme_index;
@@ -49,14 +50,18 @@ App({
   /**
    * 处理场景值
    */
-  async handleScene(scene = '') {
+  async handleScene(option) {
+    const { oid = '' } = option.query;
     try {
       const db = wx.cloud.database();
-      const { data = [] } = await db.collection('user').get();
+      let { data = [] } = await db.collection('user').get();
       if (!data.length) {
         /** user表 _openid唯一索引 */
-        await db.collection('user').add({ data: { inviter: scene, create_time: db.serverDate() } });
+        await db.collection('user').add({ data: { inviter: oid, create_time: db.serverDate() } });
+        const { data: n_data = [] } = await db.collection('user').get();
+        data = n_data;
       }
+      this.globalData.openid = data[0]._openid;
     } catch (error) {
       /* eslint-disable-next-line no-console */
       console.log(error);

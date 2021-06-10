@@ -210,8 +210,9 @@ Page({
   },
   onShareAppMessage() {
     const { logic, type } = this.data;
+    const { openid } = getApp().globalData;
     const { title } = logic;
-    const path = `/pages/detail/detail?type=${type}&logic_id=${logic._id}`;
+    const path = `/pages/detail/detail?type=${type}&logic_id=${logic._id}&oid=${openid}`;
     return { title, path };
   },
 });

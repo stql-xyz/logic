@@ -6,7 +6,7 @@ Page({
 
   },
 
-  onLoad: function () {
+  onLoad: async function () {
     /** 获取最近一个月注册用户的数据 */
     try {
       const cloud_res = await wx.cloud.callFunction({ name: 'user', data: {
