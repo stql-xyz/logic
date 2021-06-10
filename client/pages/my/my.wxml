@@ -14,7 +14,7 @@
   <row-cell title="历史记录" link="/pages/list/list?type=user_read">
       <text slot="icon" class="iconfont icon-lishi"></text>
   </row-cell>
-  <row-cell title="XXXXX" bindtap="updateUser">
+  <!-- <row-cell title="XXXXX" bindtap="updateUser">
     <text slot="icon" class="iconfont icon-lishi"></text>
-  </row-cell>
+  </row-cell> -->
 </view>
