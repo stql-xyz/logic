@@ -61,7 +61,9 @@ Page({
     if (tipStr) wx.showToast({ title: tipStr });
   },
   /** ------------获取页面数据------------ */
-  goTop: () => setTimeout(() => this.setData({ pageTop: 0 }), 10),
+  goTop() {
+    setTimeout(() => this.setData({ pageTop: 0 }), 0);
+  },
   logic_cache: {},
   async getLogicById(logic_id) {
     if (this.data.btn_loading || !logic_id) return {};
