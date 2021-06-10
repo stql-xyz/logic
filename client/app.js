@@ -1,6 +1,7 @@
 // app.js
 App({
-  onLaunch() {
+  onLaunch(option) {
+    this.handleScene(option.scene);
     if (!wx.cloud) {
       /* eslint-disable-next-line no-console */
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
@@ -44,6 +45,22 @@ App({
     this.globalData.theme_index = theme_index;
 
     this.initLogicRead();
+  },
+  /**
+   * 处理场景值
+   */
+  async handleScene(scene = '') {
+    try {
+      const db = wx.cloud.database();
+      const { data = [] } = await db.collection('user').get();
+      if (!data.length) {
+        /** user表 _openid唯一索引 */
+        await db.collection('user').add({ data: { inviter: scene, create_time: db.serverDate() } });
+      }
+    } catch (error) {
+      /* eslint-disable-next-line no-console */
+      console.log(error);
+    }
   },
 
   getThemeIndex() {

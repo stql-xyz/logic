@@ -10,24 +10,41 @@ Page({
     color_strs: AppGlobalData.color_strs,
   },
 
+  async updateUser() {
+		COMFUN.vibrate();
+		let userProfile = '';
+		try {
+			const { userInfo } = await COMFUN.wxPromise(wx.getUserProfile)({ desc: '用户头像展示' });
+			userProfile = userInfo;
+		} catch (error) {
+			console.log(error);
+		}
+		if (!userProfile) return;
+		wx.showLoading();
+		try {
+			const cloud_res = await wx.cloud.callFunction({
+				name: 'user',
+				data: { $url: 'ser_user_info', userInfo: userProfile },
+			});
+			COMFUN.result(cloud_res).success(() => {
+				wx.navigateTo({ url: '/pages/prize/prize' });
+      });
+		} catch (error) {
+			COMFUN.showErr({ type: 'ser_user_info', error });
+		}
+		wx.hideLoading();
+	},
+
   onLoad() {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();
   },
 
-  onReady() {
-
-  },
-
   onShow() {
     this.setData({ theme_index: APP.getThemeIndex() });
     APP.setTabBar();
     APP.setNavBar();
-  },
-
-  onPullDownRefresh() {
-
   },
 
   onTabItemTap() {
