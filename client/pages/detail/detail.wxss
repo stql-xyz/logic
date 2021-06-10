@@ -89,12 +89,12 @@
 .next .edit {
   margin-top: 40rpx;
   opacity: 0.3;
-  padding: 10rpx;
+  padding: 15rpx 30rpx;
   color: var(--theme-color);
 }
-.next .edit .iconfont {
+/* .next .edit .iconfont {
   margin-right: 10rpx;
-}
+} */
 .next-hover {
   background: var(--next-hover);
 }

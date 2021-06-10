@@ -40,9 +40,8 @@
       <button hover-class="next-hover" loading="{{btn_loading}}" bindtap="nextLogic">
         <text wx:if="{{!btn_loading}}">下一题</text>
       </button>
-      <navigator class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
-        <text class="iconfont icon-edit"></text>
-        <!-- <text>编辑</text> -->
+      <navigator bindtap="vibrate" class="edit" url="/pages/edit/edit?logic_id={{logic._id}}">
+        <text class="iconfont icon-edit"></text><!-- <text>编辑</text> -->
       </navigator>
     </view>
   </view>
