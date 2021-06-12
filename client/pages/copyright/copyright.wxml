@@ -1,0 +1,7 @@
+<!--client/pages/copyright/copyright.wxml-->
+<view class="page {{color_strs[theme_index]}}-page">
+  <view class="cnt">1. 本应用所有内容均为用户提供，属个人行为，不代表本应用立场，本应用不因此而承担任何法律责任。</view>
+  <view class="cnt">2. 各位用户提供的内容，请勿侵犯他人的知识产权及相关权利。</view>
+  <view class="cnt">3. 本应用反对任何违反中华人民共和国有关知识产权的法律法规的行为， 如果广大用户发现用户提供的内容有侵犯他人权利的情形，请通过邮件告知我们。</view>
+  <view class="cnt">logicalapp@163.com</view>
+</view>

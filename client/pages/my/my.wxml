@@ -14,6 +14,10 @@
   <row-cell title="历史记录" link="/pages/list/list?type=user_read">
       <text slot="icon" class="iconfont icon-lishi"></text>
   </row-cell>
+  <view style="margin-bottom: 30px"></view>
+  <row-cell title="版权说明" link="/pages/copyright/copyright">
+      <text slot="icon" class="iconfont icon-copyright"></text>
+  </row-cell>
   <!-- <row-cell title="XXXXX" bindtap="updateUser">
     <text slot="icon" class="iconfont icon-lishi"></text>
   </row-cell> -->
