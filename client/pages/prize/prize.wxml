@@ -1,1 +1,22 @@
 <!--client/pages/prize/prize.wxml-->
+<view class="page {{color_strs[theme_index]}}-page">
+  <view>钱包: 0元    提现</view>
+
+  <view wx:if="{{inviters !== ''}}">
+    <view>第1期活动</view>
+    <view>{{inviters}}人已被邀请, 当前排名 {{index}}</view>
+    <view>活动规则</view>
+  </view>
+  <view class="ranking-list">
+    <view class="ranking" wx:for="{{ranking_list}}" wx:key="_id">
+      <block wx:if="{{index < 3}}">
+        <view class="ranking-item" wx:for="{{item.users}}" wx:key="avatar_url" wx:for-item="user" wx:for-index="idx">
+          <image mode="aspectFit" class="rank-pic" src="{{rank_pic[index]}}"></image>
+          <image mode="aspectFit" class="rank-pic" src="{{user.avatar_url}}"></image>
+          <view class="text ellipsis">{{user.nickname}}</view>
+          <view class="text ellipsis">邀请<text>{{item._id}}</text>人</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

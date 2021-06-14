@@ -39,7 +39,6 @@ App({
       color_strs,
       bottom_active,
       category_list,
-      user: {},
       openid: '',
     };
     const theme_index = wx.getStorageSync('theme_index');
@@ -54,7 +53,7 @@ App({
     const { oid = '' } = option.query;
     try {
       const db = wx.cloud.database();
-      let { data = [] } = await db.collection('user').get();
+      let { data = [] } = await db.collection('user').field({ _openid: true }).get();
       if (!data.length) {
         /** user表 _openid唯一索引 */
         await db.collection('user').add({ data: { inviter: oid, create_time: db.serverDate() } });

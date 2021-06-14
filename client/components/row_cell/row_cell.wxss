@@ -8,6 +8,12 @@
   justify-content: space-between;
 }
 
+.left {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .title {
   margin-right: var(--space-1);
 }

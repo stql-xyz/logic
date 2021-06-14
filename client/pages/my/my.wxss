@@ -19,6 +19,10 @@
   overflow: hidden;
   margin-bottom: 10px;
 }
+.avatar image {
+  width: 60px;
+  height: 60px;
+}
 .name {
   color: var(--theme-color);
 }

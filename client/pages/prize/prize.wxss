@@ -1,1 +1,40 @@
 /* client/pages/prize/prize.wxss */
+.page {
+  width: 120vw;
+  height: 100vh;
+  padding: var(--space-2);
+  padding-right: calc(var(--space-2) + 20vw);
+  box-sizing: border-box;
+  overflow-y: scroll;
+  background: var(--page-bg);
+  color: var(--theme-color);
+}
+.ranking:first-child {
+  border-top: 1px solid var(--bottom-border);
+}
+.ranking {
+  border-bottom: 1px solid var(--bottom-border);
+}
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+.ranking-item .rank-pic {
+  width: 15vw;
+  flex-basis: 15vw;
+  height: 16vw;
+  padding: 5rpx 25rpx;
+  box-sizing: border-box;
+  max-height: 100%;
+  max-width: 100%;
+  text-align: center;
+  flex-grow: 0;
+}
+.ranking-item .text {
+  width: 30%;
+  flex-basis: 30%;
+  text-align: right;
+  flex-grow: 1;
+}

@@ -21,3 +21,14 @@
 .divider::after {
   margin-left: 20rpx;
 }
+
+/* 超出省略 */
+.ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
