@@ -172,17 +172,17 @@ Page({
   },
   /** ------------周期函数------------- */
   async onLoad(options) {
-    const { type, logic_id } = options;
+    let { type, logic_id } = options;
     this.setData({ theme_index: APP.getThemeIndex(), type });
     wx.showLoading({ title: '加载中...' });
     try {
       // 刚进入页面不用cache
       const db = wx.cloud.database();
-      const new_logic_id = logic_id || wx.getStorageSync(`${type}_current`);
+      logic_id = logic_id || wx.getStorageSync(`${type}_current`);
       let logic = '';
-      if (new_logic_id) {
+      if (logic_id) {
         try {
-          const idLogic = await db.collection('logic').doc(new_logic_id).get();
+          const idLogic = await db.collection('logic').doc(logic_id).get();
           logic = idLogic.data;
         } catch (error) {
           /* eslint-disable-next-line no-console */
@@ -194,6 +194,7 @@ Page({
         [logic] = typeLogicList.data;
       }
       this.setData({ logic });
+      type = logic.type;
       this.setLogicStar();
       this.dealWithTitle();
       wx.hideLoading();

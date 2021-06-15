@@ -1,11 +1,13 @@
 <!--client/pages/share/share.wxml-->
-<wxml-to-canvas class="widget"></wxml-to-canvas>
-<button bindtap="extraImage">导出图片</button>
+<view class="page {{color_strs[theme_index]}}-page">
+  <wxml-to-canvas class="widget" width="{{width}}" height="{{height}}"></wxml-to-canvas>
+  <button bindtap="extraImage">导出图片</button>
 
 
-<!-- 分享图片demo -->
+  <!-- 分享图片demo -->
+  <!-- 
+  <image src="{{path}}" /> -->
+  <!-- ---- -->
 
-
-<!-- ---- -->
-
-<view>{{tempFilePath}}</view>
+  <view>{{tempFilePath}}</view>
+</view>

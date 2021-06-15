@@ -59,6 +59,12 @@
           "pathName": "pages/share/share",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/share/share",
+          "pathName": "pages/share/share",
+          "query": "logic_id=79550af260c5b3671f18272e2b01e79f",
+          "scene": null
         }
       ]
     }

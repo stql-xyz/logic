@@ -8,9 +8,45 @@ const log = cloud.logger();
 const $ = db.command.aggregate;
 const _ = db.command;
 
+// 基于base62编码生成14位的ID字符串
+// 优点：短/按时间序/双击可全选/唯一性足够安全
+const codeStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+function base62encode(v, n){
+  var ret = ""
+  for(var i=0;i<n;i++){
+    ret = codeStr[v%codeStr.length] + ret
+    v = Math.floor(v/codeStr.length)
+  }
+  return ret
+}
+function getId() {
+  var ret = ''
+  var ms = (new Date()).getTime()
+  ret += base62encode(ms, 8) // 6923年循环一次
+  ret += base62encode(Math.ceil(Math.random() * (62**6)), 6) // 冲突概率为每毫秒568亿分之一
+  return ret
+}
+
 // 云函数入口函数
 exports.main = async (event) => {
   const app = new TcbRouter({ event });
+
+  app.router('get_qrcode', async (ctx) => {
+    const { page, logic_id } = event;
+    const { OPENID = '' } = cloud.getWXContext();
+    try {
+      const user_share_id = getId();
+      const scene = `share_id=${user_share_id}`;
+      db.collection('user_share').add({ data: { _id: user_share_id, _openid: OPENID, logic_id, create_time: db.serverDate() }}).then(() => {});
+      const { buffer } = await cloud.openapi.wxacode.getUnlimited({ page, scene, autoColor: true, isHyaline: true });
+      const { fileID } = await cloud.uploadFile({ cloudPath: `qrcode/${user_share_id}.png`, fileContent: buffer });
+      ctx.body = { ok: true, data: fileID };
+    } catch (error) {
+      log.error({ name: 'get_qrcode', error });
+			ctx.body = { ok: false };
+    }
+  });
+
   /**用户已读 */
   app.router('get_user_read', async (ctx) => {
     const { OPENID = '' } = cloud.getWXContext();
