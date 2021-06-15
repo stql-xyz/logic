@@ -9,6 +9,16 @@ const log = cloud.logger();
 const $ = db.command.aggregate;
 const _ = db.command;
 
+function getWeekLevel () {
+  const current_year = new Date().getFullYear();
+  const first_day = new Date(current_year, 0, 1).getDay();
+  const cn_first_day = (first_day === 0 ? 7 : first_day);
+  /** 今年第一周第一天 */
+  const first_date = new Date(current_year, 0, (8 - cn_first_day));
+  const between_days = (new Date().valueOf() - first_date.valueOf()) / (1000 * 60 * 60 * 24);
+  return Math.ceil(between_days);
+}
+
 // 云函数入口函数
 exports.main = async (event) => {
   const app = new TcbRouter({ event });
@@ -33,7 +43,7 @@ exports.main = async (event) => {
 
   app.router('get_user_prize', async (ctx) => {
     const { OPENID = '' } = cloud.getWXContext();
-    const week = 23;
+    const week = getWeekLevel();
     try {
       const { list = [] } = await db.collection('user')
         .aggregate()

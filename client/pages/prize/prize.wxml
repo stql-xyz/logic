@@ -1,7 +1,10 @@
 <!--client/pages/prize/prize.wxml-->
 <view class="page {{color_strs[theme_index]}}-page">
-  <view>钱包: 0元    提现</view>
-
+  <view>每周一期: 邀请排名第一，第二，第三按照5:3:2瓜分百元红包</view>
+  <view>钱包: 12   （全部提现）   历史记录 ></view>
+  <view>
+    如果有未兑换的，显示并去兑换。
+  </view>
   <view wx:if="{{inviters !== ''}}">
     <view>第1期活动</view>
     <view>{{inviters}}人已被邀请, 当前排名 {{index}}</view>
