@@ -126,6 +126,7 @@ Page({
     }
   },
   nextLogic() {
+    if (this.data.logic_title.length === 0) return;
     this.vibrate();
     this.jumpLogic(1);
   },
